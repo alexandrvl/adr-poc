@@ -1,0 +1,9 @@
+C4Container
+    title Container diagram for ADR Validation
+
+    System_Boundary(github, "GitHub") {
+        Container(github_actions, "GitHub Actions", "CI Platform", "Executes the repository workflows on push/PR", "github_actions")
+        Container(adr_repo, "ADR Repository", "Git Repo", "Stores markdown ADRs and validation scripts")
+    }
+
+    Rel(github_actions, adr_repo, "Reads and validates", "Python / CLI")

@@ -1,0 +1,39 @@
+name: Generate ADR Diagrams
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/adr/**/*.mmd'
+
+permissions:
+  contents: write
+
+jobs:
+  generate-diagrams:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Mermaid CLI
+        run: npm install -g @mermaid-js/mermaid-cli
+
+      - name: Generate Diagrams
+        run: |
+          chmod +x scripts/generate_diagrams.sh
+          ./scripts/generate_diagrams.sh
+
+      - name: Commit Generated Images
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs(adr): auto-generate mermaid diagrams [skip ci]"
+          file_pattern: "docs/adr/**/*.png"

@@ -1,0 +1,10 @@
+systems:
+  - id: github
+    name: GitHub
+    description: Code hosting and version control
+  - id: github_actions
+    name: GitHub Actions
+    description: CI/CD and automation platform
+  - id: auth
+    name: Authentication System
+    description: Unified authentication domain
