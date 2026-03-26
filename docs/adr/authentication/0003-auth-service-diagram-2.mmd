@@ -1,0 +1,9 @@
+C4Container
+    title Authentication Context
+
+    System_Boundary(auth, "New Authentication System") {
+        Container(oauth, "OAuth Service", "Go", "Handles SSO")
+        ContainerDb(db, "Credentials DB", "PostgreSQL", "Stores user identities")
+    }
+
+    Rel(oauth, db, "Reads/Writes", "TCP/IP")
